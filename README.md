@@ -23,3 +23,11 @@ It will check the hash to make sure that the download is correct, and if not, th
 Security:
 List of open ports, close and in use
 Hardening (Check that it is activated: Windows firewall, Windows Defender, protection against ransomware, disk encryption, secure login authentication, remote access, disable, automatic Windows updates,) and if not, notify and show the option of activate it.
+
+
+Things to consider:
+
+
+Backup:
+ - Destination field on csv must have the .zip format
+ - 
