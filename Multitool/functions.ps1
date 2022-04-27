@@ -14,15 +14,22 @@ Function get_dest_folder{
         $final += $array[$i]
         $final += "\"
     }
-    $global:zip = $array[-1]
     return $final
+}
+
+Function get_dest_file{
+    Param ($string)
+    $array = $string.Split("\")
+    
+    $zip = $array[-1]
+    return $zip
 }
 
 #Creates folder if not exists by a given route
 Function create_if_not_exists{
     Param ($string)
     if (-not(Test-Path -Path $string)){
-        [void](New-Item -Path $String -ItemType Directory)
+        [void](New-Item -Path $string -ItemType Directory)
     }
 }
 
