@@ -4,6 +4,28 @@
 #Read the csv file and save it in the variable $csv
 read_csv("target_backups.csv")
 
+
+#Check if NuGet is installed, otherwise will install it
+if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" }))
+{
+    #Install the NuGet Package Provider for powershell
+    Install-PackageProvider -Name NuGet -Force
+
+    #Check if was installed correctly, if not will close the script with exit code 7
+    if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" }))
+    { 
+    Write-Host "NuGet for Powershell couldn't been installed"
+    #Exits the script with custom error code, that means that NuGet couldn't been installed
+    Exit 7
+    
+    } else { Write-Host "NuGet for Powershell has been installed" }
+
+} else {
+
+    Write-Host "NuGet for Powershell is already installed"
+}
+
+
 #Check if the compress module is installed, otherwise will install it
 if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" }))
 {
@@ -47,9 +69,7 @@ for ($i = 0; $i -lt $csv.Length; $i++){
         #Setting the file name with date and destination
         $zip = zip_date
         $destination = $csv_destination_folder + $zip
-        echo $zip
-        echo $destination
-        
+                
         #Convert the origin target to zip into destination file
 
         #If the value password is empty will not encrypt the compressed file, otherwise will encrypt with the password provided by csv
