@@ -36,6 +36,7 @@ Backup:
  - If you don't want password make sure it dont have blank spaces, otherwise will encrypt the destination file with those blank spaces
  - Defining the directories you can use %username% as a system variable
  - If you want to extract the zip file encrypted with password you will need to use a 3rd party program, cause default file extractor of Windows 10 can't process the decryption
+ - The backup script only will create a zip that a folder that at least contains 1 file
 
 Exit Codes:
  - Backup:
@@ -43,11 +44,10 @@ Exit Codes:
 	 Exit with code 8 = 7Zip couldn't been installed
 
 Cosas pendientes:
+ - Agregar fichero de logs
  - Revisar como subir archivo a drive a través de powershell
  - Revisar si por remoto funciona el %username%
  - Revisar instalar NuGet se muestra el output
  - Revisar NuGet no se puede eliminar
  - Antes de instalar 7Zip para powershell instalar proveedor NuGet y comprobar si existe en 2 directorios
- - Pasar codigo a funciones
- - Zip error al comprimir carpeta vacía con compress-7Zip
- - 
+ - Zip solo comprime si tiene archivos

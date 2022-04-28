@@ -1,0 +1,14 @@
+Instalar chocolatey como gestor de paquetes
+
+7-Zip{X}
+GoogleChrome
+Firefox
+*Opera
+AnyDesk
+*TeamViewer
+AdobeReader{X}
+*VLC
+*Putty
+*Draw.io
+*Notepad++
+*Visual Studio Code

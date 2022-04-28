@@ -19,27 +19,39 @@ for ($i = 0; $i -lt $csv.Length; $i++){
     $destination = $csv[$i].Destination
     $pass = $csv[$i].Password
 
+    #Replace the %username% string at the origin and destination to the %username% variable
     $origin = $origin.replace("%username%",$env:UserName)
     $destination = $destination.replace("%username%",$env:UserName)
 
+    #Gets the destination folder and the destination file name
     $csv_destination_folder = get_dest_folder($destination)
     $zip = get_dest_file($destination)
 
-    #If $origin path is found will create the zip
+    #If $origin path is found will continue
     if (Test-Path -Path $origin){
         
-        #Create destination folder if doesn't exist
-        create_if_not_exists($csv_destination_folder)
+        #If the $origin path contains any file recursively will proceed creating the zip
+        if ((Get-ChildItem -Path $origin -Recurse -File -ErrorAction SilentlyContinue -Force) -ne $null){
 
-        #Setting the file name with date and destination
-        $zip = zip_date
-        $destination = $csv_destination_folder + $zip
+            #Create destination folder if doesn't exist
+            create_if_not_exists($csv_destination_folder)
+
+            #Setting the file name with date and destination
+            $zip = zip_date
+            $destination = $csv_destination_folder + $zip
                 
-        #Starts the compression
-        start_compression        
+            #Starts the compression
+            start_compression        
 
-        #Check if the compression was realized successfully
-        compression_check
+            #Check if the compression was realized successfully
+            compression_check
+
+        } else {
+
+            Write-Host "$backup_counter." "FAILED: Path $origin doesn't contain any files, so can't be compressed - From" "$origin" "To" "$destination"
+        }
+
+        
 
     } else {
         
