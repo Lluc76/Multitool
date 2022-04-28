@@ -29,7 +29,7 @@ Execute remote commands:
  - Ports 5985,5986
  - WinRM service running (on client execute "winrm quickconfig" if is not enabled)
  - Executer user needs to be an administrator on the remote machine or a member of the Remote Management Users group
- - **You need to set de Execution Policy to RemoteSigned with "Set-ExecutionPolicy RemoteSigned"
+ - **You need to set the Execution Policy to RemoteSigned with "Set-ExecutionPolicy RemoteSigned"
 
 Backup:
  - Destination field on csv must have the .zip format
@@ -45,7 +45,9 @@ Exit Codes:
 Cosas pendientes:
  - Revisar como subir archivo a drive a través de powershell
  - Revisar si por remoto funciona el %username%
+ - Revisar instalar NuGet se muestra el output
+ - Revisar NuGet no se puede eliminar
  - Antes de instalar 7Zip para powershell instalar proveedor NuGet y comprobar si existe en 2 directorios
  - Pasar codigo a funciones
- - Zip error al comprimir carpeta vacía
- - Al instalar NuGet se muestra el output
+ - Zip error al comprimir carpeta vacía con compress-7Zip
+ - 

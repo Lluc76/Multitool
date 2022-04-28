@@ -4,46 +4,11 @@
 #Read the csv file and save it in the variable $csv
 read_csv("target_backups.csv")
 
-
 #Check if NuGet is installed, otherwise will install it
-if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" }))
-{
-    #Install the NuGet Package Provider for powershell
-    Install-PackageProvider -Name NuGet -Force
-
-    #Check if was installed correctly, if not will close the script with exit code 7
-    if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" }))
-    { 
-    Write-Host "NuGet for Powershell couldn't been installed"
-    #Exits the script with custom error code, that means that NuGet couldn't been installed
-    Exit 7
-    
-    } else { Write-Host "NuGet for Powershell has been installed" }
-
-} else {
-
-    Write-Host "NuGet for Powershell is already installed"
-}
-
+install_nuget
 
 #Check if the compress module is installed, otherwise will install it
-if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" }))
-{
-    #Install the 7zip module for powershell
-    Install-Module -Name 7Zip4PowerShell -Force
-
-    #Check if was installed correctly, if not will close the script with exit code 8
-    if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" }))
-    { 
-    Write-Host "7Zip for Powershell couldn't been installed"
-    #Exits the script with custom error code, that means that 7Zip couldn't been installed
-    Exit 8
-    
-    } else { Write-Host "7Zip for Powershell has been installed" }
-
-} else {
-    Write-Host "7Zip for Powershell is already installed"
-}
+install_7zip
 
 #Iterate in every row from the csv file
 for ($i = 0; $i -lt $csv.Length; $i++){ 
@@ -70,25 +35,11 @@ for ($i = 0; $i -lt $csv.Length; $i++){
         $zip = zip_date
         $destination = $csv_destination_folder + $zip
                 
-        #Convert the origin target to zip into destination file
+        #Starts the compression
+        start_compression        
 
-        #If the value password is empty will not encrypt the compressed file, otherwise will encrypt with the password provided by csv
-        if ($pass -eq ""){
-            Compress-7zip -Path $origin -ArchiveFileName ($csv_destination_folder + $zip) -Format Zip
-        } else {
-            Compress-7zip -Path $origin -ArchiveFileName ($csv_destination_folder + $zip) -Format SevenZip -Password $pass -EncryptFilenames
-        }
-
-        if (Test-Path -Path $destination){
-                         
-            #Write the output if compression is completed without errors
-            Write-Host "$backup_counter." "SUCCESS - From" "$origin" "To" "$destination"
-
-        } else {
-            
-            #Show error if the zip file is not created
-            Write-Host "$backup_counter." "FAILED: ZIP was not correctly created - From" "$origin" "To" "$destination"
-        }
+        #Check if the compression was realized successfully
+        compression_check
 
     } else {
         
