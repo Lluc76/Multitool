@@ -55,3 +55,4 @@ Cosas pendientes:
  - Todos los prerequisitos se puedan aplicar con 1 script
  - Testear backups con NAS
  - Especificar versiones anteriores de Windows Server para comandos de powershell
+ - Revisar que al ejecutar el script de backups mediante el task schedule use como usuario el que debería y no uno del sistema "interno"
