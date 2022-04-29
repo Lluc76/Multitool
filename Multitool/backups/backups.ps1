@@ -1,3 +1,5 @@
+Start-Transcript -Path "transcript.txt"
+
 #Import the functions from functions file
 . .\functions.ps1
 
@@ -47,10 +49,10 @@ for ($i = 0; $i -lt $csv.Length; $i++){
             compression_check
 
         } else {
-
+            
+            #If not will show the error
             Write-Host "$backup_counter." "FAILED: Path $origin doesn't contain any files, so can't be compressed - From" "$origin" "To" "$destination"
         }
-
         
 
     } else {
@@ -59,3 +61,5 @@ for ($i = 0; $i -lt $csv.Length; $i++){
         Write-Host "$backup_counter." "FAILED: Path $origin Not Found - From" "$origin" "To" "$destination"
     }
 }
+
+Stop-Transcript

@@ -5,7 +5,6 @@ Utilities:
 
 Do Backups:
 It will allow you to select which folders will be backed up
-Where you wana do the backup and with possibilitie with save it on drive
 The files will be compressed and you can choose if you want encrypt them with password
 
 Optimization:
@@ -45,9 +44,14 @@ Exit Codes:
 
 Cosas pendientes:
  - Agregar fichero de logs
- - Revisar como subir archivo a drive a través de powershell
  - Revisar si por remoto funciona el %username%
  - Revisar instalar NuGet se muestra el output
  - Revisar NuGet no se puede eliminar
+ - Crear tarea en Windows que ejecute el backup para definir una periodicidad
  - Antes de instalar 7Zip para powershell instalar proveedor NuGet y comprobar si existe en 2 directorios
- - Zip solo comprime si tiene archivos
+ - Agregar posibilidad de que los backups se borren hayan pasado x cantidad de tiempo, para no ocupar demasiada memoria
+ - Agregar posibilidad de programar tareas, borrar las creadas, etc
+ - Al crear tarea copiar script a una carpeta custom en alguna ruta interna para que el task scheduler encuentre siempre el script
+ - Todos los prerequisitos se puedan aplicar con 1 script
+ - Testear backups con NAS
+ - Especificar versiones anteriores de Windows Server para comandos de powershell
