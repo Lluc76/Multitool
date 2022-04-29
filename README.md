@@ -42,6 +42,14 @@ Exit Codes:
          Exit with code 7 = NuGet couldn't been installed
 	 Exit with code 8 = 7Zip couldn't been installed
 
+Task Scheduler:
+ - Parameters:
+	· once,[randomdelay <timespan>],[repetitionduration <timespan>,repetitioninterval <timespan>],at <datetime>
+	· weekly
+	· daily
+	· atlogon
+	· atstartup
+
 Cosas pendientes:
  - Agregar fichero de logs
  - Revisar si por remoto funciona el %username%
@@ -55,4 +63,4 @@ Cosas pendientes:
  - Todos los prerequisitos se puedan aplicar con 1 script
  - Testear backups con NAS
  - Especificar versiones anteriores de Windows Server para comandos de powershell
- - Revisar que al ejecutar el script de backups mediante el task schedule use como usuario el que debería y no uno del sistema "interno"
+ - Revisar que al ejecutar el script de backups mediante el task schedule use como usuario el que debería y no uno del sistema "interno", que lo ejecute silenciosamente
