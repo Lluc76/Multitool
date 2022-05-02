@@ -1,4 +1,4 @@
-Origin,Destination,Password
-C:\Users\%username%\Desktop\TestBackupFolder,C:\Users\%username%\Desktop\Backups\Test.zip,
-D:\Descargas\Programas\DS4,C:\Users\%username%\Desktop\Backups\DS4.zip,
-C:\Users\%username%\Desktop\Test2,C:\Users\%username%\Desktop\Backups\Test2.zip,
+Enabled,Origin,Destination,Password
+Yes,C:\Users\%username%\Desktop\TestBackupFolder,C:\Users\%username%\Desktop\Backups\Test.zip,
+Yes,D:\Descargas\Programas\DS4,C:\Users\%username%\Desktop\Backups\DS4.zip,
+Yes,C:\Users\%username%\Desktop\Test2,C:\Users\%username%\Desktop\Backups\Test2.zip,
