@@ -46,7 +46,7 @@ Function install_nuget{
     if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
 
         #Install the NuGet Package Provider for powershell
-        Install-PackageProvider -Name NuGet -Force
+        Install-PackageProvider -Name NuGet -Force > $null
 
         #Check if was installed correctly, if not will close the script with exit code 7
         if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
