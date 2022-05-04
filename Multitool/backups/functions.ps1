@@ -50,7 +50,7 @@ function Check-IsElevated{
 
     if (-Not($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)))
         { 
-            Write-Host "Error: This script needs to be executed with Admin rights"
+            Write-Error "This script needs to be executed with Admin rights"
             Stop-Transcript
             Exit 1
         }  
@@ -59,14 +59,18 @@ function Check-IsElevated{
 #Check if NuGet is installed, otherwise will install it
 Function install_nuget{
     if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
+        
+        try{
 
-        #Install the NuGet Package Provider for powershell
-        Install-PackageProvider -Name NuGet -Force > $null
+            #Install the NuGet Package Provider for powershell
+            Install-PackageProvider -Name NuGet -Force -ErrorAction Stop 2>&1 > $null
+        
+        }catch{}        
 
         #Check if was installed correctly, if not will close the script with exit code 7
         if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
      
-            Write-Host "Error: NuGet for Powershell couldn't been installed"
+            Write-Error "NuGet for Powershell couldn't been installed"
             Stop-Transcript
             Exit 1
     
@@ -83,13 +87,16 @@ Function install_nuget{
 Function install_7zip{
     if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" })){
 
-        #Install the 7zip module for powershell
-        Install-Module -Name 7Zip4PowerShell -Force
+        try {
+            #Install the 7zip module for powershell
+            Install-Module -Name 7Zip4PowerShell -ErrorAction Stop -Force
+        
+        }catch{}   
 
         #Check if was installed correctly, if not will close the script with exit code 8
         if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" })){
          
-            Write-Host "Error: 7Zip for Powershell couldn't been installed"
+            Write-Error "7Zip for Powershell couldn't been installed"
             Stop-Transcript
             Exit 1
     

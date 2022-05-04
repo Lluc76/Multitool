@@ -79,9 +79,6 @@ Task Scheduler:
 
 Cosas pendientes:
  - Revisar si por remoto funciona el %username%
- - Revisar NuGet no se puede eliminar
- - Agregar posibilidad de que los backups se borren cuando haya pasado x cantidad de tiempo, para no ocupar demasiado espacio en disco
- - Agregar posibilidad de programar tareas, borrar las creadas, etc
  - Al crear tarea copiar script a una carpeta custom en alguna ruta interna para que el task scheduler encuentre siempre el script
  - Todos los prerequisitos se puedan aplicar con 1 script
  - Testear backups con NAS
