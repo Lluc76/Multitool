@@ -41,6 +41,21 @@ Function zip_date{
     return $zip
 }
 
+#Checks if the script is executed with Admin rights
+function Check-IsElevated{
+
+    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+
+    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
+
+    if (-Not($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)))
+        { 
+            Write-Host "Error: This script needs to be executed with Admin rights"
+            Stop-Transcript
+            Exit 1
+        }  
+ }
+
 #Check if NuGet is installed, otherwise will install it
 Function install_nuget{
     if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
@@ -51,9 +66,9 @@ Function install_nuget{
         #Check if was installed correctly, if not will close the script with exit code 7
         if(-Not (Get-PackageProvider | Where-Object { $_.name -eq "NuGet" })){
      
-            Write-Host "NuGet for Powershell couldn't been installed"
-            #Exits the script with custom error code, that means that NuGet couldn't been installed
-            Exit 7
+            Write-Host "Error: NuGet for Powershell couldn't been installed"
+            Stop-Transcript
+            Exit 1
     
         } else { Write-Host "NuGet for Powershell has been installed" }
 
@@ -74,9 +89,9 @@ Function install_7zip{
         #Check if was installed correctly, if not will close the script with exit code 8
         if(-Not (Get-Module -ListAvailable | Where-Object { $_.name -eq "7Zip4PowerShell" })){
          
-            Write-Host "7Zip for Powershell couldn't been installed"
-            #Exits the script with custom error code, that means that 7Zip couldn't been installed
-            Exit 8
+            Write-Host "Error: 7Zip for Powershell couldn't been installed"
+            Stop-Transcript
+            Exit 1
     
         } else { Write-Host "7Zip for Powershell has been installed" }
 
@@ -86,12 +101,13 @@ Function install_7zip{
     }
 }
 
-#If the value password is empty will not encrypt the compressed file, otherwise will encrypt with the password provided by csv
+#If the value password don't have at least 4 charaters will not encrypt the compressed file, otherwise will encrypt with the password provided by csv
 Function start_compression{
-    if ($pass -eq ""){
-        Compress-7zip -Path $origin -ArchiveFileName ($csv_destination_folder + $zip) -Format Zip
-    } else {
+    if ($pass -match "^.{4}.*"){
         Compress-7zip -Path $origin -ArchiveFileName ($csv_destination_folder + $zip) -Format SevenZip -Password $pass -EncryptFilenames
+        
+    } else {
+        Compress-7zip -Path $origin -ArchiveFileName ($csv_destination_folder + $zip) -Format Zip
     }
 }
 

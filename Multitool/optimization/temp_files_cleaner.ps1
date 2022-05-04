@@ -1,5 +1,15 @@
-#Borra los archivos temporales
+#Import the functions from functions file
+. .\functions.ps1
 
+#Read the csv file and save it in the variable $csv
+read_csv("temp_paths.csv")
+
+#Borra los archivos temporales
+for ($i = 0; $i -lt $csv.Length; $i++){ 
+    $backup_counter = $i + 1
+
+    
+}
 $Path = "C:\Users\%username%\AppData\Local\Temp\*"
 
 $Path = $Path.replace("%username%",$env:UserName)

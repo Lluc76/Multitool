@@ -1,5 +1,5 @@
 #Path must end with "\"
-$path = "C:\Users\llucr\Desktop\"
+$path = ".\"
 $log = "task_scheduler-"+(Get-Date -Format "dd-MM-yy--HH-mm") + ".log"
 Start-Transcript -Path ($path+$log)
 
@@ -21,7 +21,7 @@ for ($i = 0; $i -lt $csv.Length; $i++){
         $parameters = $csv[$i].Parameters
         
         #Create the variable to see if the task already exists
-        $User= $env:USERNAME
+        $User= "NT AUTHORITY\SYSTEM"
         $taskExists = Get-ScheduledTask | Where-Object {$_.TaskName -like $name }
 
         #If exists will show the error and will skip the creation

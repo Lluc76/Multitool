@@ -9,6 +9,8 @@ Start-Transcript -Path ($path+$log)
 #Read the csv file and save it in the variable $csv
 read_csv("target_backups.csv")
 
+Check-IsElevated
+
 #Check if NuGet is installed, otherwise will install it
 install_nuget
 
@@ -25,8 +27,9 @@ for ($i = 0; $i -lt $csv.Length; $i++){
     $pass = $csv[$i].Password
 
     #Replace the %username% string at the origin and destination to the %username% variable
-    $origin = $origin.replace("%username%",$env:UserName)
-    $destination = $destination.replace("%username%",$env:UserName)
+    $userloggedin = (Get-WmiObject -Class Win32_ComputerSystem | Select-Object UserName).UserName.Split('\')[1]
+    $origin = $origin.replace("%username%",$userloggedin)
+    $destination = $destination.replace("%username%",$userloggedin)
 
     if ($csv[$i].Enabled -eq "Yes"){        
 
