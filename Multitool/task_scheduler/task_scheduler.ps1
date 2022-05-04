@@ -33,15 +33,8 @@ for ($i = 0; $i -lt $csv.Length; $i++){
 
         } else {        
             
-            #Take the parameters from the csv and save it as a command in $Trigger
-            $Trigger = "New-ScheduledTaskTrigger $parameters"
-            $Trigger = Invoke-Expression $Trigger
+            create_task
 
-            #Creates the task
-            $Action= New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-file `"$file`"" -WorkingDirectory $path
-            $Settings= New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -StartWhenAvailable
-            Register-ScheduledTask -TaskName $name -Trigger $Trigger -User $User -Action $Action -RunLevel Highest -Settings $Settings –Force > $null
-        
             #Check if exists to write the  correct output
             if($taskExists) {
 
