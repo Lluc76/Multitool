@@ -9,6 +9,7 @@ Do Backups:
  - The files will be compressed and you can choose if you want encrypt them with password
  - You can Enable/Disable a specific backup from the csv
  - The backup process will create a logfile to easy manage and 
+ - ***Upload the backups to Drive
 
 Task Scheduler (for Powershell Scripts):
  - You can schedule tasks with custom names and parameters
@@ -57,29 +58,7 @@ Things to have in consideration:
  	- In the csv at the column "Enabled" needs to be "Yes" to proceed with the creation of thetask, otherwise will output that is disabled. This is useful if you want to maintain other task configurations but you don't want to create it in that moment
  	- There are a log file that will be saved by default near the script, but you can change it modifying the value of the variable $path. The path must end with "\" character
  	- Parameters:
-		Note that the 1st parameter is required, and depending on which one you also need the "at" parameter with its corresponding value. If you have doubts can see the documentation here: https://www.pdq.com/powershell/new-scheduledtasktrigger/
-
-		- once, [randomdelay [TimeSpan]], [repetitionduration TimeSpan], [repetitioninterval TimeSpan], at DateTime
-		- weekly, [randomdelay [TimeSpan]], [weeksinterval Integer], at DateTime, -DaysOfWeek DayOfWeek
-		- daily, [randomdelay [TimeSpan]], [daysinterval Integer], at DateTime
-		- atlogon, [randomdelay [TimeSpan]], [user [user]]
-		- atstartup, [randomdelay [TimeSpan]]
-
-	Meanings of the parameters:
-		- once = Indicates that a trigger starts a task once at a time specified in the At parameter
-		- weekly = Indicates that the trigger starts a task on a recurring weekly schedule
-		- daily = Indicates that a trigger starts a task on a recurring daily schedule
-		- atlogon = Indicates that a trigger starts a task when a user logs on
-		- atstartup = Indicates that a trigger starts a task when the system is started
-		- at = Specifies a date and time to trigger the task
-		
-		- randomdelay = Specifies a random amount of time to delay the start time of the trigger. The delay time is a random time between the time the task triggers and the time that you specify in this setting.
-		- repetitionduration = Specifies how long the repetition pattern repeats after the task starts
-		- repetitioninterval = Repeats the task at the specified time interval
-		- weeksinterval = Specifies the interval between the weeks in the schedule
-		- daysinterval = Specifies the interval between the days in the schedule
-		- user = Specifies the identifier of the user for a trigger that starts a task when a user logs on, by default is setted to all users
-		- daysofweek = Specifies an array of the days of the week on which Task Scheduler runs the task
+		Documentation of how to use the parameters here: https://www.pdq.com/powershell/new-scheduledtasktrigger/
 
 ******************************************************************
 
